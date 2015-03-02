@@ -15,8 +15,6 @@ public class HourLog {
 		
 		User currentUser = new Manager(id);
 		
-		System.out.println("Welcome to the hour tracking software of the past! "
-				+ "Where all your dreams die and data gets destroyed.");
 		
 		db = new Database();
 		db.putUser(currentUser);
