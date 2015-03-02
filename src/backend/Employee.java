@@ -37,9 +37,14 @@ public class Employee implements User {
 	}
 
 	@Override
-	public boolean getWeeklyHours(int month, int dayOfMonth) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean getWeeklyHours(int month, int firstDayOfWeek) {
+		int day = firstDayOfWeek;
+		for(int i = 0; i < 7;i++)
+		{	
+			getDailyHours(month, day);
+		}
+		
+		return true;
 	}
 
 	@Override
