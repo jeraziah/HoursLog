@@ -9,18 +9,18 @@ public class Manager implements User {
 		this.id = id;
 	}
 	
+	@Override
 	public boolean isManager() {
 		return manager;
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return id;
 	}
 
 	@Override
-	public boolean setHours(int dayOfMonth, int hours) {
+	public boolean setHours(int month, int dayOfMonth, int hours) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -49,9 +49,5 @@ public class Manager implements User {
 		return false;
 	}
 
-	@Override
-	public boolean isManager(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 }

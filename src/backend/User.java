@@ -1,12 +1,18 @@
 package backend;
 
+import java.util.ArrayList;
+
 public interface User {
 	
-	public boolean isManager(int id);
+	public int[] hours = new int[365];
+	
+	public ArrayList<ArrayList<Integer>> year = new ArrayList<ArrayList<Integer>>();
+	
+	public boolean isManager();
 	
 	public int getID();
 	
-	public boolean setHours (int dayOfMonth, int hours);
+	public boolean setHours (int month, int dayOfMonth, int hours);
 	
 	public boolean getDailyHours(int month, int dayOfMonth);
 	
@@ -17,3 +23,4 @@ public interface User {
 	public boolean getOvertime();
 	
 }
+
