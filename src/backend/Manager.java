@@ -1,6 +1,7 @@
 package backend;
 
 public class Manager implements User {
+	public int[] hours = new int[365];
 	boolean manager = true;
 	int id;
 	
@@ -18,7 +19,7 @@ public class Manager implements User {
 	public int getID() {
 		return id;
 	}
-
+	
 	@Override
 	public boolean setHours(int month, int dayOfMonth, int hours) {
 		// TODO Auto-generated method stub

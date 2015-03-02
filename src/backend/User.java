@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public interface User {
 	
-	public int[] hours = new int[365];
-	
 	public ArrayList<ArrayList<Integer>> year = new ArrayList<ArrayList<Integer>>();
 	
 	public boolean isManager();

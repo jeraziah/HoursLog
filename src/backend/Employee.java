@@ -1,7 +1,12 @@
 package backend;
 
 public class Employee implements User {
+	public int[] hours = new int[365];
 	int id;
+	
+	public Employee (int id) {
+		this.id = id;
+	}
 
 	@Override
 	public boolean isManager() {
@@ -12,13 +17,13 @@ public class Employee implements User {
 	public int getID() {
 		return id;
 	}
-
+	
 	@Override
 	public boolean setHours(int month, int dayOfMonth, int hours) {
 		int converted = convert(month, dayOfMonth);
 		
 		if(!inMonth(month, dayOfMonth)) { return false; }
-		User.hours[converted] = hours;
+		this.hours[converted] = hours;
 		
 		return true;
 	}
@@ -27,7 +32,7 @@ public class Employee implements User {
 	public boolean getDailyHours(int month, int dayOfMonth) {
 		int converted = convert(month, dayOfMonth);
 		
-		System.out.println(User.hours[converted]);
+		System.out.println(this.hours[converted]);
 		return false;
 	}
 
