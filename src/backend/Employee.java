@@ -21,8 +21,7 @@ public class Employee implements User {
 	@Override
 	public boolean setHours(int month, int dayOfMonth, int hours) {
 		int converted = convert(month, dayOfMonth);
-		
-		if(!inMonth(month, dayOfMonth)) { return false; }
+	
 		this.hours[converted] = hours;
 		
 		return true;

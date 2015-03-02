@@ -1,10 +1,6 @@
 package backend;
 
-import java.util.ArrayList;
-
 public interface User {
-	
-	public ArrayList<ArrayList<Integer>> year = new ArrayList<ArrayList<Integer>>();
 	
 	public boolean isManager();
 	
