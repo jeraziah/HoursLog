@@ -3,6 +3,7 @@ package backend;
 public class Employee implements User {
 	public int[] hours = new int[365];
 	int id;
+	double payScale;
 	
 	public Employee (int id) {
 		this.id = id;

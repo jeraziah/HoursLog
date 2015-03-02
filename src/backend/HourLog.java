@@ -44,5 +44,24 @@ public class HourLog {
 		
 		return false;
 	}
+	
+	public boolean setPayScale(int id, int hourlyRate) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			return false;
+		}
+		
+		if(user instanceof Employee) {
+			((Employee) user).payScale = hourlyRate;
+			return true;
+		}
+		if(user instanceof Manager) {
+			((Manager) user).payScale = hourlyRate;
+			return true;
+		}
+		
+		return false;
+	}
 
 }

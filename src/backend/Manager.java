@@ -4,6 +4,7 @@ public class Manager implements User {
 	public int[] hours = new int[365];
 	boolean manager = true;
 	int id;
+	double payScale;
 	
 	public Manager(int id)
 	{
@@ -22,13 +23,18 @@ public class Manager implements User {
 	
 	@Override
 	public boolean setHours(int month, int dayOfMonth, int hours) {
-		// TODO Auto-generated method stub
-		return false;
+		int converted = Conversions.convert(month, dayOfMonth);
+	
+		this.hours[converted] = hours;
+		
+		return true;
 	}
 
 	@Override
 	public boolean getDailyHours(int month, int dayOfMonth) {
-		// TODO Auto-generated method stub
+		int converted = Conversions.convert(month, dayOfMonth);
+		
+		System.out.println(this.hours[converted]);
 		return false;
 	}
 
