@@ -61,5 +61,98 @@ public class HourLog {
 		
 		return false;
 	}
-
+	
+	public boolean removeEmployee(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+			return false;
+		}
+		else {
+			user = null;
+			db.putUser(user);
+			return true;
+		}
+	}
+	
+	public boolean viewDailyHours(int id, int month, int dayOfMonth) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			((Employee) user).getDailyHours(month, dayOfMonth);
+			return true;
+		}
+		if(user instanceof Manager) {
+			((Manager) user).getDailyHours(month, dayOfMonth);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean viewWeeklyHours(int id, int month, int firstDayOfWeek) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			((Employee) user).getWeeklyHours(month, firstDayOfWeek);
+			return true;
+		}
+		if(user instanceof Manager) {
+			((Manager) user).getWeeklyHours(month, firstDayOfWeek);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean approveHours(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			return ((Employee) user).approveHours();
+		}
+		
+		return false;
+	}
+	
+	public boolean viewSick(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			return ((Employee) user).viewSick();
+		}
+		
+		return false;
+	}
+	
+	public boolean viewVacation(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			return ((Employee) user).viewVacation();
+		}
+		
+		return false;
+	}
 }

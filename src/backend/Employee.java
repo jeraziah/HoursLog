@@ -1,8 +1,11 @@
-package backend;
+	package backend;
 
 public class Employee implements User {
 	public int[] hours = new int[365];
 	int id;
+	private int sickDaysRemaining = 10;
+	private int vacationDaysRemaining = 10;
+	private boolean approved = false;
 	double payScale;
 	
 	public Employee (int id) {
@@ -59,4 +62,42 @@ public class Employee implements User {
 		return false;
 	}
 	
+	public boolean useSick(int month, int dayOfMonth) {
+		int converted = Conversions.convert(month,  dayOfMonth);
+		
+		if(sickDaysRemaining > 0) {
+			sickDaysRemaining--;
+			this.hours[converted] = -1;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean useVacation(int month, int dayOfMonth) {
+		int converted = Conversions.convert(month,  dayOfMonth);
+		
+		if(vacationDaysRemaining > 0) {
+			vacationDaysRemaining--;
+			this.hours[converted] = -2;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean viewSick() {
+		System.out.println("Sick days left: " + sickDaysRemaining);
+		return true;
+	}
+	
+	public boolean viewVacation() {
+		System.out.println("Vacation days left: " + vacationDaysRemaining);
+		return true;
+	}
+	
+	public boolean approveHours() {
+		this.approved = true;
+		return true;
+	}
 }
