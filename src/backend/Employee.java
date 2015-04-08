@@ -100,4 +100,8 @@ public class Employee implements User {
 		this.approved = true;
 		return true;
 	}
+	
+	public boolean approved() {
+		return this.approved;
+	}
 }

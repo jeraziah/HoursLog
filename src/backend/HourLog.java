@@ -155,4 +155,19 @@ public class HourLog {
 		
 		return false;
 	}
+	
+	public boolean checkApproved(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if(user instanceof Employee) {
+			if(((Employee) user).approved() == true) { return true; }
+			else { return false; }
+		}
+		
+		return false;
+	}
 }
