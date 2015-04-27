@@ -19,8 +19,28 @@ public class HourLog {
 		db = new Database();
 		db.putUser(currentUser);
 		
-		System.out.println("Enter your user id:");
+		System.out.println("Please enter a command or type 'h' for help:\n");
 		
+		String command = scanner.next();
+		
+		if(command == "h"){
+			System.out.println(""
+					+ "\nHelp Menu:\n"
+					+ "\nh - help"
+					+ "\ngetYTD - get year to date earnings of an employee"
+					+ "\n"
+					+ "\n"
+					+ "\n"
+					+ "\n"
+					+ "\n");
+		}
+		else if(command == "getYTD"){
+			System.out.println("please enter employee id to get YTD of:\n");
+			int tempId = scanner.nextInt();
+			User tempUser = new Employee(tempId);
+			System.out.println(tempUser.getYTD());
+		}
+		else if(command == "")
 		
 		scanner.close();
 		return;
