@@ -3,18 +3,9 @@ package backend;
 import java.util.Scanner;
 
 public class HourLog {
-<<<<<<< HEAD
-	public static Database db;
-
-	public static void main(String args[]) {
-=======
 	public static DatabaseSupport db;
 	
 	public static void main(String args[]){	
-		System.out.println("Please enter employeee id number for manager:");
->>>>>>> aed3ae78aa82e21903322c2f6f11013a5f1c9265
-		
-		db = new Database();
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Please create employeee id number for default manager. Default is 0:\n");
@@ -22,7 +13,7 @@ public class HourLog {
 		User manager = new Manager(id);
 		db.putUser(manager);
 		
-<<<<<<< HEAD
+		
 		while (true) {
 
 			System.out
@@ -51,38 +42,6 @@ public class HourLog {
 			}
 
 		}
-
-=======
-		User currentUser = new Manager(id);
-		
-		
-		db = new DatabaseSupport();
-		db.putUser(currentUser);
-		
-		System.out.println("Please enter a command or type 'h' for help:\n");
-		
-		String command = scanner.next();
-		
-		if(command == "h"){
-			System.out.println(""
-					+ "\nHelp Menu:\n"
-					+ "\nh - help"
-					+ "\ngetYTD - get year to date earnings of an employee"
-					+ "\n"
-					+ "\n"
-					+ "\n"
-					+ "\n"
-					+ "\n");
-		}
-		else if(command == "getYTD"){
-			System.out.println("please enter employee id to get YTD of:\n");
-			int tempId = scanner.nextInt();
-			User tempUser = new Employee(tempId);
-			System.out.println(tempUser.getYTD());
-		}
-		else if(command == "")
-		
->>>>>>> aed3ae78aa82e21903322c2f6f11013a5f1c9265
 		scanner.close();
 		return;
 	}
