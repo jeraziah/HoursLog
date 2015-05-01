@@ -2,7 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 
-public class Database {
+public class DatabaseSupport {
 	ArrayList<User> users = new ArrayList<>();
 	
 	public boolean putUser(User user) {

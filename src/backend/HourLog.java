@@ -3,7 +3,7 @@ package backend;
 import java.util.Scanner;
 
 public class HourLog {
-	public static Database db;
+	public static DatabaseSupport db;
 	
 	public static void main(String args[]){	
 		System.out.println("Please enter employeee id number for manager:");
@@ -16,7 +16,7 @@ public class HourLog {
 		User currentUser = new Manager(id);
 		
 		
-		db = new Database();
+		db = new DatabaseSupport();
 		db.putUser(currentUser);
 		
 		System.out.println("Please enter a command or type 'h' for help:\n");
