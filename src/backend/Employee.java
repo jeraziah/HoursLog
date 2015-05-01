@@ -74,8 +74,23 @@ public class Employee implements User {
 
 	@Override
 	public boolean getOvertime() {
-		// TODO Iteration 3
-		return false;
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date();
+		calendar.setTime(date);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int converted = Conversions.convert(month, day);
+		
+		int overtime = 0;
+		for(int i = 0; i < converted; i++) {
+			if(hours[i] > 8) {
+				overtime = overtime + (hours[i] - 8);
+			}
+		}
+		
+		System.out.println("Employee Overtime: " + overtime);
+		
+		return true;
 	}
 	
 	public boolean useSick(int month, int dayOfMonth) {
