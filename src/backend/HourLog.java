@@ -14,7 +14,7 @@ public class HourLog {
 		int id = scanner.nextInt();
 		User manager = new Manager(id);
 		db.putUser(manager);
-		
+		User currentUser = manager;
 		
 		while (true) {
 
@@ -23,14 +23,8 @@ public class HourLog {
 
 			String command = scanner.next();
 
-			if (command == "h") {
-				System.out.println("" + "\nHelp Menu:\n" + "\nh - help"
-						+ "\ngetYTD - get year to date earnings of an employee"
-						+ "\nshutdown - exit the application - this will erase all data"
-						+ "\n" 
-						+ "\n" 
-						+ "\n" 
-						+ "\n");
+			if (command == "h") {	
+				printHelpMenu();
 			} else if (command == "getYTD") {
 				System.out.println("please enter employee id to get YTD of:\n");
 				int tempId = scanner.nextInt();
@@ -194,4 +188,36 @@ public class HourLog {
 
 		return false;
 	}
+	
+	public static void printHelpMenu(){
+		System.out.println("" + "\nHelp Menu:\n" + "\nh - help\n\n* indicates manager functions"
+					+ "\n-----------User Commands-----------------"
+					+ "\ngetYTD - get year to date earnings"
+					+ "\nsetHours sets hours worked for the current day"
+					+ "\ngetDailyHours - get the hours worked the past 7 days"
+					+ "\ngetWeeklyHours - get the hours worked displayed by week"
+					+ "\ngetOvertime - display overtime logged this year"
+					+ "\nuseSick - use sick time"
+					+ "\nuseVacation - use vacation time"
+					+ "\nviewSick - view sick time used"
+					+ "\nviewVacation - view vacation time used"
+					+ "\n\n----------Manager Commands------------ "
+					+ "\n*addEmployee - add a new employee"
+					+ "\n*removeEmployee - remove an employee. Caution - do not remove yourself!"
+					+ "\n*viewHours - view hours for any employee given id"
+					+ "\n*approveHours - approve the input hours for an employee"
+					+ "\n*awardOvertime - approve Overtime hours"
+					+ "\n*setPayScale - set the pay rate for an employee"
+					+ "\n*viewSick - view sick time used for an employee"
+					+ "\n*viewVacation - view vacation time used for an employee"
+					+ "\n*viewTotalHours view hour totals for all employees"
+					+ "\n*viewOvertimePaidTotal - view all payments for overtime"
+					+ "\n*viewOvertimePaidEmployee"
+					+ "getTaxRate - get the tax percentages for an employee"
+					+ "viewEmployeeYTD - view the year to date earnings of an employee"
+					+ "\n*shutdown - exit the application - this will erase all data"
+					+ "\n");
+	}
 }
+
+	
