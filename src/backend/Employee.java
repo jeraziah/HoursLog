@@ -67,7 +67,7 @@ public class Employee implements User {
 			total = total + hours[i];
 		}
 		
-		System.out.println("Employee YTD: " + total);
+		System.out.println("Employee YTD: " + total + "\n-------------------------\n\n");
 		
 		return true;
 	}
@@ -88,7 +88,7 @@ public class Employee implements User {
 			}
 		}
 		
-		System.out.println("Employee Overtime: " + overtime);
+		System.out.println("Employee Overtime: " + overtime + "\n-------------------------\n\n");
 		
 		return true;
 	}

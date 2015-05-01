@@ -23,13 +23,13 @@ public class HourLog {
 
 			String command = scanner.next();
 
-			if (command == "h") {	
+			if (command.equals("h")) {	
 				printHelpMenu();
-			} else if (command == "getYTD") {
+			} else if (command.equals("getYTD")) {
 				System.out.println("please enter employee id to get YTD of:\n");
 				int tempId = scanner.nextInt();
 				User tempUser = new Employee(tempId);
-				System.out.println(tempUser.getYTD());
+				tempUser.getYTD();
 			} else if(command == ""){
 				
 			}
