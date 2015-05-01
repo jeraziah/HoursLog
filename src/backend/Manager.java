@@ -1,5 +1,8 @@
 package backend;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Manager implements User {
 	public int[] hours = new int[365];
 	boolean manager = true;
@@ -51,8 +54,21 @@ public class Manager implements User {
 
 	@Override
 	public boolean getYTD() {
-		// TODO Auto-generated method stub
-		return false;
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date();
+		calendar.setTime(date);
+		int month = calendar.get(Calendar.MONTH) + 1;
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int converted = Conversions.convert(month, day);
+		
+		int total = 0;
+		for(int i = 0; i < converted; i++) {
+			total = total + hours[i];
+		}
+		
+		System.out.println("Employee YTD: " + total);
+		
+		return true;
 	}
 
 	@Override
