@@ -6,6 +6,8 @@ public class HourLog {
 	public static DatabaseSupport db;
 	
 	public static void main(String args[]){	
+		db = new DatabaseSupport();
+		
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Please create employeee id number for default manager. Default is 0:\n");
