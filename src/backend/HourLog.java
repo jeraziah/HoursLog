@@ -25,19 +25,69 @@ public class HourLog {
 
 			if (command.equals("h")) {	
 				printHelpMenu();
-			} else if (command.equals("getYTD")) {
-				System.out.println("please enter employee id to get YTD of:\n");
-				int tempId = scanner.nextInt();
-				User tempUser = new Employee(tempId);
-				tempUser.getYTD();
-			} else if(command == ""){
+			} else if(command == "setHours"){
 				
 			}
-			else if (command == "shutdown") {
-				break;
+			else if(command == "getDailyHours")
+			{
+				
+			}else if(command == "getOvertime")
+			{
+				
+			}else if(command == "useSick")
+			{
+				
+			}else if(command == "useVacation")
+			{
+				
+			}else if(command == "viewSick")
+			{
+				
+			}else if(command == "viewVacation")
+			{
+				
 			}
-
+			else if(currentUser.isManager()){ //admin commands
+				if(command == ""){
+				
+					
+				}else if (command.equals("getYTD")) {
+					System.out.println("please enter employee id to get YTD of:\n");
+					int tempId = scanner.nextInt();
+					User tempUser = new Employee(tempId);
+					tempUser.getYTD();
+				} 	
+				else if(command == "")
+				{
+					
+				}else if(command == "")
+				{
+					
+				}else if(command == "")
+				{
+					
+				}else if(command == "")
+				{
+					
+				}else if(command == "")
+				{
+					
+				}else if(command == "")
+				{
+					
+				}
+				else if (command == "shutdown") {
+					break;
+				}
+			}else{ //user isnt manager
+				System.out.println("You do not have privelages for this command");
+			}
+		
 		}
+			
+			
+		
+		
 		scanner.close();
 		return;
 	}
