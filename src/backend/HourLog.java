@@ -181,6 +181,10 @@ public class HourLog {
 					db.pullUser(scanner.nextInt());
 					
 				}*/
+				
+				
+				
+				
 				else if (command.equals("shutdown")) {
 					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
 					if(scanner.next() == "y"){
