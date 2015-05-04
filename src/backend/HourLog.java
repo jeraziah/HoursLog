@@ -147,7 +147,7 @@ public class HourLog {
 					System.out.println("please enter employee ID:\n");
 					((Employee)db.pullUser(scanner.nextInt())).viewVacation();
 					
-				}else if(command.equals("viewTotalHours"))
+				}/*else if(command.equals("viewTotalHours"))
 				{
 					System.out.println("please enter employee ID:\n");
 				
@@ -157,9 +157,14 @@ public class HourLog {
 					int overtime = 0;
 					
 					for(int i = 0; i < db.users.size(); i++){
-						overtime += ((Employee)db.users.get(i)).overtime;
+						if(db.users.get(i) instanceof Employee) {
+							overtime += ((Employee)db.users.get(i)).overtime;
+						}
+						else if(db.users.get(i) instanceof Manager) {
+							overtime += ((Manager)db.users.get(i)).overtime;
+						}
 					}
-					((Employee)db.pullUser(scanner.nextInt())).getOvertime();
+					System.out.println("Total Overtime: " + overtime);
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					System.out.println("please enter employee ID:\n");
@@ -175,7 +180,7 @@ public class HourLog {
 					System.out.println("please enter employee ID:\n");
 					db.pullUser(scanner.nextInt());
 					
-				}
+				}*/
 				else if (command.equals("shutdown")) {
 					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
 					if(scanner.next() == "y"){
