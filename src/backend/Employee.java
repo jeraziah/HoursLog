@@ -151,7 +151,7 @@ public class Employee implements User {
 	{
 		return this.overtimeApproved;
 	}
-	public boolean setPayscale(int i) {
+	public boolean setPayscale(double i) {
 		this.payScale = i;
 		return true;
 	}

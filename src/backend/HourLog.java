@@ -49,7 +49,7 @@ public class HourLog {
 					((Employee)u).useSick(Calendar.MONTH, scanner.nextInt());
 				}
 				else {
-					System.out.println("Only employees can use this function.");
+					((Manager)u).useSick(Calendar.MONTH, scanner.nextInt());
 				}
 				db.putUser(u);
 			}else if(command.equals("useVacation"))
@@ -60,7 +60,7 @@ public class HourLog {
 					((Employee)u).useVacation(Calendar.MONTH, scanner.nextInt());
 				}
 				else {
-					System.out.println("Only employees can use this function.");
+					((Manager)u).useVacation(Calendar.MONTH, scanner.nextInt());
 				}
 			}else if(command.equals("viewSick"))
 			{
@@ -69,7 +69,7 @@ public class HourLog {
 					((Employee)u).viewSick();
 				}
 				else {
-					System.out.println("Only employees can use this function.");
+					((Manager)u).viewSick();
 				}
 			}else if(command.equals("viewVacation"))
 			{
@@ -78,7 +78,7 @@ public class HourLog {
 					((Employee)u).viewVacation();
 				}
 				else {
-					System.out.println("Only employees can use this function.");
+					((Manager)u).viewSick();
 				}
 			}else if(command.equals("logoff")) {
 				currentUser = null;
@@ -135,7 +135,7 @@ public class HourLog {
 					System.out.println("please enter employee ID to set pay for:\n");
 					User u = db.pullUser(scanner.nextInt());
 					System.out.println("please enter pay rate:\n");
-					((Employee)u).setPayscale(scanner.nextInt());
+					((Employee)u).setPayscale(scanner.nextDouble());
 					db.putUser(u);
 				}else if(command.equals("viewSick"))
 				{
@@ -384,9 +384,9 @@ public class HourLog {
 						+ "\n\n----------Manager Commands------------ "
 						+ "\n*addEmployee - add a new employee"
 						+ "\n*removeEmployee - remove an employee. Caution - do not remove yourself!"
-						+ "\n*viewHours - view hours for any employee given id"
-						+ "\n*approveHours - approve the input hours for an employee"
-						+ "\n*awardOvertime - approve Overtime hours"
+					//	+ "\n*viewHours - view hours for any employee given id"
+						//+ "\n*approveHours - approve the input hours for an employee"
+						//+ "\n*awardOvertime - approve Overtime hours"
 						+ "\n*setPayScale - set the pay rate for an employee"
 						+ "\n*viewSick - view sick time used for an employee"
 						+ "\n*viewVacation - view vacation time used for an employee"

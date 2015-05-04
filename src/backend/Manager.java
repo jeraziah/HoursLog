@@ -8,6 +8,8 @@ public class Manager implements User {
 	boolean manager = true;
 	int overtime;
 	int id;
+	private int sickDaysRemaining = 10;
+	private int vacationDaysRemaining = 10;
 	double payScale;
 	
 	public Manager(int id)
@@ -105,6 +107,44 @@ public class Manager implements User {
 		System.out.println("Total hours for user is: " + total);
 		
 		return total;
+	}
+	
+	public boolean useSick(int month, int dayOfMonth) {
+		int converted = Conversions.convert(month,  dayOfMonth);
+		
+		if(sickDaysRemaining > 0) {
+			sickDaysRemaining--;
+			this.hours[converted] = -1;
+			System.out.println("Sick days remaining: " + sickDaysRemaining);
+			return true;
+		}
+		
+		System.out.println("Insufficient sick days remaining.");
+		return false;
+	}
+	
+	public boolean useVacation(int month, int dayOfMonth) {
+		int converted = Conversions.convert(month,  dayOfMonth);
+		
+		if(vacationDaysRemaining > 0) {
+			vacationDaysRemaining--;
+			this.hours[converted] = -2;
+			System.out.println("Vacation days remaining: " + vacationDaysRemaining);
+			return true;
+		}
+		
+		System.out.println("Insufficient vacation days remaining.");
+		return false;
+	}
+	
+	public boolean viewSick() {
+		System.out.println("Sick days remaining: " + sickDaysRemaining);
+		return true;
+	}
+	
+	public boolean viewVacation() {
+		System.out.println("Vacation days remaining: " + vacationDaysRemaining);
+		return true;
 	}
 
 }
