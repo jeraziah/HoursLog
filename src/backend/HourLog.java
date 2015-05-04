@@ -155,6 +155,7 @@ public class HourLog {
 				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
+				
 					
 					for(int i = 0; i < db.users.size(); i++){
 						overtime += ((Employee)db.users.get(i)).overtime;
