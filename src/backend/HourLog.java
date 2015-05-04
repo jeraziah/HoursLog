@@ -1,10 +1,12 @@
 package backend;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class HourLog {
 	public static DatabaseSupport db;
-	
+
 	public static void main(String args[]){	
 		db = new DatabaseSupport();
 		
@@ -26,17 +28,25 @@ public class HourLog {
 			if (command.equals("h")) {	
 				printHelpMenu();
 			} else if(command == "setHours"){
-				
+				System.out.println("please enter number of hours worked:\n");
+				User temp = db.pullUser(currentUser.getID());
+				temp.setHours(Calendar.MONTH, Calendar.DAY_OF_MONTH, scanner.nextInt());
+				db.putUser(temp);
 			}
 			else if(command == "getDailyHours")
 			{
-				
+				User u = db.pullUser(currentUser.getID());
+				u.getDailyHours(Calendar.MONTH, Calendar.DAY_OF_MONTH);
+				db.putUser(u);
 			}else if(command == "getOvertime")
 			{
-				
+				db.pullUser(currentUser.getID()).getOvertime();
 			}else if(command == "useSick")
 			{
-				
+				System.out.println("please enter how many sick hours to use");
+				User u = db.pullUser(currentUser.getID());
+				u.useSick(scanner.nextInt());
+				db.putUser(u);
 			}else if(command == "useVacation")
 			{
 				
@@ -57,37 +67,60 @@ public class HourLog {
 					User tempUser = new Employee(tempId);
 					tempUser.getYTD();
 				} 	
-				else if(command == "")
+				else if(command == "addEmployee")
+				{
+					System.out.println("please enter employee id number");
+					int newId = scanner.nextInt();
+					db.putUser(new Employee(newId));
+				}else if(command == "removeEmployee")
+				{
+					System.out.println("please enter employee id number");
+					int newId = scanner.nextInt();
+					db.pullUser(newId);
+				}else if(command == "viewHours")
 				{
 					
-				}else if(command == "")
+				}else if(command == "approveHours")
 				{
 					
-				}else if(command == "")
+				}else if(command == "awardOvertime")
 				{
 					
-				}else if(command == "")
+				}else if(command == "setPayScale")
 				{
 					
-				}else if(command == "")
+				}else if(command == "viewSick")
 				{
 					
-				}else if(command == "")
+				}else if(command == "viewVacation")
+				{
+					
+				}else if(command == "viewTotalHours")
+				{
+					
+				}else if(command == "viewOvertimePaidTotal")
+				{
+					
+				}else if(command == "viewOvertimePaidEmployee")
+				{
+					
+				}else if(command == "getTaxRate")
+				{
+					
+				}else if(command == "viewEmployeeYTD")
 				{
 					
 				}
 				else if (command == "shutdown") {
-					break;
+					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
+					if(scanner.next() == "y"){
+						break;
+					}
+				}else{ //user isnt manager
+					System.out.println("You do not have privelages for this command");
 				}
-			}else{ //user isnt manager
-				System.out.println("You do not have privelages for this command");
-			}
-		
-		}
-			
-			
-		
-		
+			}//if statements
+		}//while loop
 		scanner.close();
 		return;
 	}
@@ -238,36 +271,37 @@ public class HourLog {
 
 		return false;
 	}
-	
-	public static void printHelpMenu(){
-		System.out.println("" + "\nHelp Menu:\n" + "\nh - help\n\n* indicates manager functions"
-					+ "\n-----------User Commands-----------------"
-					+ "\ngetYTD - get year to date earnings"
-					+ "\nsetHours sets hours worked for the current day"
-					+ "\ngetDailyHours - get the hours worked the past 7 days"
-					+ "\ngetWeeklyHours - get the hours worked displayed by week"
-					+ "\ngetOvertime - display overtime logged this year"
-					+ "\nuseSick - use sick time"
-					+ "\nuseVacation - use vacation time"
-					+ "\nviewSick - view sick time used"
-					+ "\nviewVacation - view vacation time used"
-					+ "\n\n----------Manager Commands------------ "
-					+ "\n*addEmployee - add a new employee"
-					+ "\n*removeEmployee - remove an employee. Caution - do not remove yourself!"
-					+ "\n*viewHours - view hours for any employee given id"
-					+ "\n*approveHours - approve the input hours for an employee"
-					+ "\n*awardOvertime - approve Overtime hours"
-					+ "\n*setPayScale - set the pay rate for an employee"
-					+ "\n*viewSick - view sick time used for an employee"
-					+ "\n*viewVacation - view vacation time used for an employee"
-					+ "\n*viewTotalHours view hour totals for all employees"
-					+ "\n*viewOvertimePaidTotal - view all payments for overtime"
-					+ "\n*viewOvertimePaidEmployee"
-					+ "getTaxRate - get the tax percentages for an employee"
-					+ "viewEmployeeYTD - view the year to date earnings of an employee"
-					+ "\n*shutdown - exit the application - this will erase all data"
-					+ "\n");
+
+	public static void printHelpMenu() {
+		System.out
+				.println(""
+						+ "\nHelp Menu:\n"
+						+ "\nh - help\n\n* indicates manager functions"
+						+ "\n-----------User Commands-----------------"
+						+ "\ngetYTD - get year to date earnings"
+						+ "\nsetHours sets hours worked for the current day"
+						+ "\ngetDailyHours - get the hours worked the past 7 days"
+						+ "\ngetWeeklyHours - get the hours worked displayed by week"
+						+ "\ngetOvertime - display overtime logged this year"
+						+ "\nuseSick - use sick time"
+						+ "\nuseVacation - use vacation time"
+						+ "\nviewSick - view sick time used"
+						+ "\nviewVacation - view vacation time used"
+						+ "\n\n----------Manager Commands------------ "
+						+ "\n*addEmployee - add a new employee"
+						+ "\n*removeEmployee - remove an employee. Caution - do not remove yourself!"
+						+ "\n*viewHours - view hours for any employee given id"
+						+ "\n*approveHours - approve the input hours for an employee"
+						+ "\n*awardOvertime - approve Overtime hours"
+						+ "\n*setPayScale - set the pay rate for an employee"
+						+ "\n*viewSick - view sick time used for an employee"
+						+ "\n*viewVacation - view vacation time used for an employee"
+						+ "\n*viewTotalHours view hour totals for all employees"
+						+ "\n*viewOvertimePaidTotal - view all payments for overtime"
+						+ "\n*viewOvertimePaidEmployee"
+						+ "getTaxRate - get the tax percentages for an employee"
+						+ "viewEmployeeYTD - view the year to date earnings of an employee"
+						+ "\n*shutdown - exit the application - this will erase all data"
+						+ "\n");
 	}
 }
-
-	
