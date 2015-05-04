@@ -27,7 +27,7 @@ public class HourLog {
 
 			if (command.equals("h")) {	
 				printHelpMenu();
-			} else if(command == "setHours"){
+			} else if(command.equals("setHours")) {
 				System.out.println("Please enter number of hours worked:\n");
 				User temp = db.pullUser(currentUser.getID());
 				temp.setHours(Calendar.MONTH, Calendar.DAY_OF_MONTH, scanner.nextInt());
@@ -80,6 +80,17 @@ public class HourLog {
 				else {
 					System.out.println("Only employees can use this function.");
 				}
+			}else if(command.equals("logoff")) {
+				currentUser = null;
+				while(currentUser == null) {
+					System.out.println("Please enter a user ID to login:");
+					int loginid = scanner.nextInt();
+					User u = db.pullUser(loginid);
+					if(u != null) {
+						currentUser = u;
+						break;
+					}
+				}
 			}
 			else if(currentUser.isManager()){ //admin commands
 				if(command.equals("")){
@@ -100,7 +111,7 @@ public class HourLog {
 				{
 					System.out.println("please enter employee id number");
 					int newId = scanner.nextInt();
-					db.pullUser(newId);
+					db.removeUser(newId);
 				}else if(command.equals("viewHours"))
 				{
 					

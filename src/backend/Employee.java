@@ -67,7 +67,7 @@ public class Employee implements User {
 			total = total + hours[i];
 		}
 		
-		System.out.println("Employee YTD: " + total + "\n-------------------------\n\n");
+		System.out.println("Employee YTD: " + total);
 		
 		return true;
 	}
@@ -88,7 +88,7 @@ public class Employee implements User {
 			}
 		}
 		
-		System.out.println("Employee Overtime: " + overtime + "\n-------------------------\n\n");
+		System.out.println("Employee Overtime: " + overtime);
 		
 		return true;
 	}
@@ -122,12 +122,12 @@ public class Employee implements User {
 	}
 	
 	public boolean viewSick() {
-		System.out.println("Sick days left: " + sickDaysRemaining);
+		System.out.println("Sick days remaining: " + sickDaysRemaining);
 		return true;
 	}
 	
 	public boolean viewVacation() {
-		System.out.println("Vacation days left: " + vacationDaysRemaining);
+		System.out.println("Vacation days remaining: " + vacationDaysRemaining);
 		return true;
 	}
 	

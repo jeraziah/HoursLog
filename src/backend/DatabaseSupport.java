@@ -26,4 +26,16 @@ public class DatabaseSupport {
 		return null;
 	}
 	
+	public boolean removeUser(int id) {
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getID() == id) {
+				users.remove(i);
+				System.out.println("Employee removed.");
+				return true;
+			}
+		}
+		System.out.println("Employee doesn't exist.");
+		return false;
+	}
+	
 }
