@@ -6,9 +6,11 @@ import java.util.Date;
 public class Employee implements User {
 	public int[] hours = new int[365];
 	int id;
+	int overtime;
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
-	private boolean approved = false;//should this be last date approved?
+	private boolean hoursApproved = false;//should this be last date approved?
+	private boolean overtimeApproved = false;
 	double payScale;
 	
 	public Employee (int id) {
@@ -81,7 +83,7 @@ public class Employee implements User {
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		int converted = Conversions.convert(month, day);
 		
-		int overtime = 0;
+		overtime = 0;
 		for(int i = 0; i < converted; i++) {
 			if(hours[i] > 8) {
 				overtime = overtime + (hours[i] - 8);
@@ -132,14 +134,23 @@ public class Employee implements User {
 	}
 	
 	public boolean approveHours() {
-		this.approved = true;
+		this.hoursApproved = true;
 		return true;
 	}
 	
-	public boolean approved() {
-		return this.approved;
+	public boolean hoursApproved() {
+		return this.hoursApproved;
 	}
-
+	
+	public boolean approveOvertime() {
+		this.overtimeApproved = true;
+		return true;
+	}
+	
+	public boolean overtimeApproved()
+	{
+		return this.overtimeApproved;
+	}
 	public boolean setPayscale(int i) {
 		this.payScale = i;
 		return true;
