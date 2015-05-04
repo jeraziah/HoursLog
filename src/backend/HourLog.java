@@ -33,15 +33,15 @@ public class HourLog {
 				temp.setHours(Calendar.MONTH, Calendar.DAY_OF_MONTH, scanner.nextInt());
 				db.putUser(temp);
 			}
-			else if(command == "getDailyHours")
+			else if(command.equals("getDailyHours"))
 			{
 				User u = db.pullUser(currentUser.getID());
 				u.getDailyHours(Calendar.MONTH, Calendar.DAY_OF_MONTH);
 				db.putUser(u);
-			}else if(command == "getOvertime")
+			}else if(command.equals("getOvertime"))
 			{
 				db.pullUser(currentUser.getID()).getOvertime();
-			}else if(command == "useSick")
+			}else if(command.equals("useSick"))
 			{
 				System.out.println("Please enter the day of the month that you wish to use your sick day on:");
 				User u = db.pullUser(currentUser.getID());
@@ -52,7 +52,7 @@ public class HourLog {
 					System.out.println("Only employees can use this function.");
 				}
 				db.putUser(u);
-			}else if(command == "useVacation")
+			}else if(command.equals("useVacation"))
 			{
 				System.out.println("Please enter the day of the month that you wish to use your vacation day on:");
 				User u = db.pullUser(currentUser.getID());
@@ -62,7 +62,7 @@ public class HourLog {
 				else {
 					System.out.println("Only employees can use this function.");
 				}
-			}else if(command == "viewSick")
+			}else if(command.equals("viewSick"))
 			{
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
@@ -71,7 +71,7 @@ public class HourLog {
 				else {
 					System.out.println("Only employees can use this function.");
 				}
-			}else if(command == "viewVacation")
+			}else if(command.equals("viewVacation"))
 			{
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
@@ -82,7 +82,7 @@ public class HourLog {
 				}
 			}
 			else if(currentUser.isManager()){ //admin commands
-				if(command == ""){
+				if(command.equals("")){
 				
 					
 				}else if (command.equals("getYTD")) {
@@ -91,51 +91,51 @@ public class HourLog {
 					User tempUser = new Employee(tempId);
 					tempUser.getYTD();
 				} 	
-				else if(command == "addEmployee")
+				else if(command.equals("addEmployee"))
 				{
 					System.out.println("please enter employee id number");
 					int newId = scanner.nextInt();
 					db.putUser(new Employee(newId));
-				}else if(command == "removeEmployee")
+				}else if(command.equals("removeEmployee"))
 				{
 					System.out.println("please enter employee id number");
 					int newId = scanner.nextInt();
 					db.pullUser(newId);
-				}else if(command == "viewHours")
+				}else if(command.equals("viewHours"))
 				{
 					
-				}else if(command == "approveHours")
+				}else if(command.equals("approveHours"))
 				{
 					
-				}else if(command == "awardOvertime")
+				}else if(command.equals("awardOvertime"))
 				{
 					
-				}else if(command == "setPayScale")
+				}else if(command.equals("setPayScale"))
 				{
 					
-				}else if(command == "viewSick")
+				}else if(command.equals("viewSick"))
 				{
 					
-				}else if(command == "viewVacation")
+				}else if(command.equals("viewVacation"))
 				{
 					
-				}else if(command == "viewTotalHours")
+				}else if(command.equals("viewTotalHours"))
 				{
 					
-				}else if(command == "viewOvertimePaidTotal")
+				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					
-				}else if(command == "viewOvertimePaidEmployee")
+				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					
-				}else if(command == "getTaxRate")
+				}else if(command.equals("getTaxRate"))
 				{
 					
-				}else if(command == "viewEmployeeYTD")
+				}else if(command.equals("viewEmployeeYTD"))
 				{
 					
 				}
-				else if (command == "shutdown") {
+				else if (command.equals("shutdown")) {
 					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
 					if(scanner.next() == "y"){
 						break;
