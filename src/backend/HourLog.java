@@ -390,11 +390,11 @@ public class HourLog {
 						+ "\n*setPayScale - set the pay rate for an employee"
 						+ "\n*viewSick - view sick time used for an employee"
 						+ "\n*viewVacation - view vacation time used for an employee"
-						+ "\n*viewTotalHours view hour totals for all employees"
-						+ "\n*viewOvertimePaidTotal - view all payments for overtime"
-						+ "\n*viewOvertimePaidEmployee"
-						+ "getTaxRate - get the tax percentages for an employee"
-						+ "viewEmployeeYTD - view the year to date earnings of an employee"
+						//+ "\n*viewTotalHours view hour totals for all employees"
+						//+ "\n*viewOvertimePaidTotal - view all payments for overtime"
+						//+ "\n*viewOvertimePaidEmployee"
+						//+ "getTaxRate - get the tax percentages for an employee"
+						//+ "viewEmployeeYTD - view the year to date earnings of an employee"
 						+ "\n*shutdown - exit the application - this will erase all data"
 						+ "\n");
 	}
