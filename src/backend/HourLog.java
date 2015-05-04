@@ -150,8 +150,8 @@ public class HourLog {
 				}else if(command.equals("viewTotalHours"))
 				{
 					System.out.println("please enter employee ID:\n");
-					((Employee)db.pullUser(scanner.nextInt())).viewHours();
-					
+				
+					db.pullUser(scanner.nextInt()).getTotalHours();
 				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
@@ -285,9 +285,11 @@ public class HourLog {
 		}
 		
 		if (user instanceof Employee) {
+			((Employee)user).getTotalHours();
 			return true;
 		}
 		if (user instanceof Manager) {
+			((Manager)user).getTotalHours();
 			return true;
 		}
 		

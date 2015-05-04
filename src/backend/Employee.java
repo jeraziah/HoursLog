@@ -155,4 +155,18 @@ public class Employee implements User {
 		this.payScale = i;
 		return true;
 	}
+	
+	@Override
+	public int getTotalHours() {
+		int total = 0;
+		for(int i = 0; i < 365; i++) {
+			if(this.hours[i] >= 0) {
+				total += this.hours[i];
+			}
+		}
+		
+		System.out.println("Total hours for user is: " + total);
+		
+		return total;
+	}
 }

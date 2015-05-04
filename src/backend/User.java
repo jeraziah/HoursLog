@@ -15,5 +15,7 @@ public interface User {
 	public boolean getYTD();
 	
 	public boolean getOvertime();
+	
+	public int getTotalHours();
 }
 
