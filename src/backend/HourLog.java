@@ -140,30 +140,40 @@ public class HourLog {
 				}else if(command.equals("viewSick"))
 				{
 					System.out.println("please enter employee ID:\n");
+					((Employee)db.pullUser(scanner.nextInt())).viewSick();
 					
 				}else if(command.equals("viewVacation"))
 				{
 					System.out.println("please enter employee ID:\n");
+					((Employee)db.pullUser(scanner.nextInt())).viewVacation();
 					
 				}else if(command.equals("viewTotalHours"))
 				{
 					System.out.println("please enter employee ID:\n");
+					((Employee)db.pullUser(scanner.nextInt())).viewHours();
 					
 				}else if(command.equals("viewOvertimePaidTotal"))
 				{
-					System.out.println("please enter employee ID:\n");
+					int overtime = 0;
 					
+					for(int i = 0; i < db.users.size(); i++){
+						overtime += db.users.get(i).overtime;
+					}
+					((Employee)db.pullUser(scanner.nextInt())).getOvertime();
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					System.out.println("please enter employee ID:\n");
+					db.pullUser(scanner.nextInt());
 					
 				}else if(command.equals("getTaxRate"))
 				{
 					System.out.println("please enter employee ID:\n");
+					db.pullUser(scanner.nextInt());
 					
 				}else if(command.equals("viewEmployeeYTD"))
 				{
 					System.out.println("please enter employee ID:\n");
+					db.pullUser(scanner.nextInt());
 					
 				}
 				else if (command.equals("shutdown")) {
