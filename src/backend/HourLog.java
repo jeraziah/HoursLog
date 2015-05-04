@@ -62,7 +62,7 @@ public class HourLog {
 				else {
 					((Manager)u).useVacation(Calendar.MONTH, scanner.nextInt());
 				}
-			}else if(command.equals("viewSick"))
+			}else if(command.equals("viewSick") && currentUser instanceof Employee)
 			{
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
@@ -71,14 +71,14 @@ public class HourLog {
 				else {
 					((Manager)u).viewSick();
 				}
-			}else if(command.equals("viewVacation"))
+			}else if(command.equals("viewVacation") && currentUser instanceof Employee)
 			{
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
 					((Employee)u).viewVacation();
 				}
 				else {
-					((Manager)u).viewSick();
+					((Manager)u).viewVacation();
 				}
 			}else if(command.equals("logoff")) {
 				currentUser = null;
@@ -96,12 +96,12 @@ public class HourLog {
 				if(command.equals("")){
 				
 					
-				}else if (command.equals("getYTD")) {
+				}/*else if (command.equals("getYTD")) {
 					System.out.println("please enter employee id to get YTD of:\n");
 					int tempId = scanner.nextInt();
 					User tempUser = new Employee(tempId);
 					tempUser.getYTD();
-				} 	
+				} 	*/
 				else if(command.equals("addEmployee"))
 				{
 					System.out.println("please enter employee id number\n");
@@ -188,16 +188,16 @@ public class HourLog {
 				
 				else if (command.equals("shutdown")) {
 					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
-					if(scanner.next() == "y"){
-						break;
+					if(scanner.next().equals("y")){
+						scanner.close();
+						System.out.println("System exiting..........\n\n\n");
+						return;
 					}
 				}else{ //user isnt manager
 					System.out.println("You do not have privelages for this command");
 				}
 			}//if statements
 		}//while loop
-		scanner.close();
-		return;
 	}
 
 	public User identifyUser(int id) {
@@ -372,7 +372,7 @@ public class HourLog {
 						+ "\nHelp Menu:\n"
 						+ "\nh - help\n\n* indicates manager functions"
 						+ "\n-----------User Commands-----------------"
-						+ "\ngetYTD - get year to date earnings"
+						//+ "\ngetYTD - get year to date earnings"
 						+ "\nsetHours sets hours worked for the current day"
 						+ "\ngetDailyHours - get the hours worked the past 7 days"
 						+ "\ngetWeeklyHours - get the hours worked displayed by week"
