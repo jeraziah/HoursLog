@@ -157,7 +157,7 @@ public class HourLog {
 					int overtime = 0;
 					
 					for(int i = 0; i < db.users.size(); i++){
-						overtime += db.users.get(i).overtime;
+						overtime += ((Employee)db.users.get(i)).overtime;
 					}
 					((Employee)db.pullUser(scanner.nextInt())).getOvertime();
 				}else if(command.equals("viewOvertimePaidEmployee"))
@@ -344,7 +344,7 @@ public class HourLog {
 		}
 
 		if (user instanceof Employee) {
-			if (((Employee) user).approved() == true) {
+			if (((Employee) user).hoursApproved() == true) {
 				return true;
 			} else {
 				return false;
