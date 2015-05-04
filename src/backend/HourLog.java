@@ -28,7 +28,7 @@ public class HourLog {
 			if (command.equals("h")) {	
 				printHelpMenu();
 			} else if(command == "setHours"){
-				System.out.println("please enter number of hours worked:\n");
+				System.out.println("Please enter number of hours worked:\n");
 				User temp = db.pullUser(currentUser.getID());
 				temp.setHours(Calendar.MONTH, Calendar.DAY_OF_MONTH, scanner.nextInt());
 				db.putUser(temp);
@@ -43,9 +43,14 @@ public class HourLog {
 				db.pullUser(currentUser.getID()).getOvertime();
 			}else if(command == "useSick")
 			{
-				System.out.println("please enter how many sick hours to use");
+				System.out.println("Please enter the day of the month that you wish to use your sick day on:");
 				User u = db.pullUser(currentUser.getID());
-				u.useSick(scanner.nextInt());
+				if(u instanceof Employee) {
+					((Employee)u).useSick(Calendar.MONTH, scanner.nextInt());
+				}
+				else {
+					System.out.println("Only employees can use this function.");
+				}
 				db.putUser(u);
 			}else if(command == "useVacation")
 			{
