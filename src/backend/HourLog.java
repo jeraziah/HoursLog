@@ -54,13 +54,32 @@ public class HourLog {
 				db.putUser(u);
 			}else if(command == "useVacation")
 			{
-				
+				System.out.println("Please enter the day of the month that you wish to use your vacation day on:");
+				User u = db.pullUser(currentUser.getID());
+				if(u instanceof Employee) {
+					((Employee)u).useVacation(Calendar.MONTH, scanner.nextInt());
+				}
+				else {
+					System.out.println("Only employees can use this function.");
+				}
 			}else if(command == "viewSick")
 			{
-				
+				User u = db.pullUser(currentUser.getID());
+				if(u instanceof Employee) {
+					((Employee)u).viewSick();
+				}
+				else {
+					System.out.println("Only employees can use this function.");
+				}
 			}else if(command == "viewVacation")
 			{
-				
+				User u = db.pullUser(currentUser.getID());
+				if(u instanceof Employee) {
+					((Employee)u).viewVacation();
+				}
+				else {
+					System.out.println("Only employees can use this function.");
+				}
 			}
 			else if(currentUser.isManager()){ //admin commands
 				if(command == ""){

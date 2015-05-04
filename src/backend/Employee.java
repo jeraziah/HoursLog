@@ -99,9 +99,11 @@ public class Employee implements User {
 		if(sickDaysRemaining > 0) {
 			sickDaysRemaining--;
 			this.hours[converted] = -1;
+			System.out.println("Sick days remaining: " + sickDaysRemaining);
 			return true;
 		}
 		
+		System.out.println("Insufficient sick days remaining.");
 		return false;
 	}
 	
@@ -111,9 +113,11 @@ public class Employee implements User {
 		if(vacationDaysRemaining > 0) {
 			vacationDaysRemaining--;
 			this.hours[converted] = -2;
+			System.out.println("Vacation days remaining: " + vacationDaysRemaining);
 			return true;
 		}
 		
+		System.out.println("Insufficient vacation days remaining.");
 		return false;
 	}
 	
