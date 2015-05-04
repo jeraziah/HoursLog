@@ -168,9 +168,9 @@ public class HourLog {
 					
 				}else if(command.equals("getTaxRate"))
 				{
-					System.out.println("please enter employee ID:\n");
-					db.pullUser(scanner.nextInt());
-					
+					//System.out.println("please enter employee ID:\n");
+					//((Employee)db.pullUser(scanner.nextInt())).getTaxRate();
+			
 				}else if(command.equals("viewEmployeeYTD"))
 				{
 					System.out.println("please enter employee ID:\n");
