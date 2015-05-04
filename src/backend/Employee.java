@@ -8,7 +8,7 @@ public class Employee implements User {
 	int id;
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
-	private boolean approved = false;
+	private boolean approved = false;//should this be last date approved?
 	double payScale;
 	
 	public Employee (int id) {
@@ -138,5 +138,10 @@ public class Employee implements User {
 	
 	public boolean approved() {
 		return this.approved;
+	}
+
+	public boolean setPayscale(int i) {
+		this.payScale = i;
+		return true;
 	}
 }

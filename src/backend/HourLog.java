@@ -104,46 +104,66 @@ public class HourLog {
 				} 	
 				else if(command.equals("addEmployee"))
 				{
-					System.out.println("please enter employee id number");
+					System.out.println("please enter employee id number\n");
 					int newId = scanner.nextInt();
 					db.putUser(new Employee(newId));
 				}else if(command.equals("removeEmployee"))
 				{
-					System.out.println("please enter employee id number");
+					System.out.println("please enter employee id number\n");
 					int newId = scanner.nextInt();
 					db.removeUser(newId);
 				}else if(command.equals("viewHours"))
 				{
-					System.out.println("Please enter employee ID number:");
+					System.out.println("Please enter employee ID number:\n");
 				}else if(command.equals("approveHours"))
 				{
+					//employee.approve(date)?
+					System.out.println("please enter employee ID to approve:\n");
+					User u = db.pullUser(scanner.nextInt());
+					((Employee)u).approveHours();
+					db.putUser(u);
 					
 				}else if(command.equals("awardOvertime"))
 				{
-					
+					System.out.println("please enter employe ID to award overtime to:\n");
+					User u = db.pullUser(scanner.nextInt());
+					System.out.println("please enter number of hours to award");
+					//((Employee)u).;   need an overtime approved?
+					db.putUser(u);
 				}else if(command.equals("setPayScale"))
 				{
-					
+					System.out.println("please enter employee ID to set pay for:\n");
+					User u = db.pullUser(scanner.nextInt());
+					System.out.println("please enter pay rate:\n");
+					((Employee)u).setPayscale(scanner.nextInt());
+					db.putUser(u);
 				}else if(command.equals("viewSick"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("viewVacation"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("viewTotalHours"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("viewOvertimePaidTotal"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("getTaxRate"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}else if(command.equals("viewEmployeeYTD"))
 				{
+					System.out.println("please enter employee ID:\n");
 					
 				}
 				else if (command.equals("shutdown")) {
