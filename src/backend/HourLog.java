@@ -114,7 +114,7 @@ public class HourLog {
 					db.removeUser(newId);
 				}else if(command.equals("viewHours"))
 				{
-					
+					System.out.println("Please enter employee ID number:");
 				}else if(command.equals("approveHours"))
 				{
 					
@@ -244,6 +244,23 @@ public class HourLog {
 			return true;
 		}
 
+		return false;
+	}
+	
+	public boolean viewHours(int id) {
+		User user = db.pullUser(id);
+		
+		if(user == null) {
+			System.err.println("User does not exist.");
+		}
+		
+		if (user instanceof Employee) {
+			return true;
+		}
+		if (user instanceof Manager) {
+			return true;
+		}
+		
 		return false;
 	}
 
