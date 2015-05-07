@@ -8,6 +8,8 @@ public class Manager implements User {
 	boolean manager = true;
 	int overtime = 0;
 	int id;
+	boolean hoursApproved = true;
+	boolean overtimeApproved = true;
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
 	double payScale;
@@ -111,6 +113,34 @@ public class Manager implements User {
 		System.out.println("Total hours for user is: " + total);
 		
 		return total;
+	}
+	
+	@Override
+	public boolean viewMonthlyPay(int month) {
+		double pay = 0;
+		
+		for(int i = Conversions.getFirstDayOfMonth(month); i < Conversions.getLastDayOfMonth(month); i++) {
+			if(this.hours[i] > 8) {
+				pay += 8 * this.payScale;
+				if(this.overtimeApproved) {
+					pay += (this.hours[i] - 8) * (this.payScale * 1.5);
+				}
+			}
+			else if(this.hours[i] > 0) {
+				pay += this.hours[i] * this.payScale;
+			}
+		}
+		if(!this.hoursApproved) {
+			pay = 0;
+			System.out.println("Hours are currently awaiting approval.");
+		}
+		if(!this.overtimeApproved) {
+			System.out.println("Overtime hours are currently awaiting approval.");
+		}
+		System.out.println("Current monthly pay is: $" + pay);
+		
+		
+		return true;
 	}
 	
 	public boolean useSick(int month, int dayOfMonth) {

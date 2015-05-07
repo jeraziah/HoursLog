@@ -94,7 +94,11 @@ public class HourLog {
 				else {
 					((Manager)u).viewVacation();
 				}
-			}else if(command.equals("logoff")) {
+			}
+			else if(command.equals("viewMonthlyPay")) {
+				db.pullUser(currentUser.getID()).viewMonthlyPay(Calendar.getInstance().get(Calendar.MONTH) + 1);
+			}
+			else if(command.equals("logoff")) {
 				currentUser = null;
 				while(currentUser == null) {
 					System.out.println("Please enter a user ID to login:");
@@ -141,12 +145,11 @@ public class HourLog {
 					((Employee)u).approveHours();
 					db.putUser(u);
 					
-				}else if(command.equals("awardOvertime"))
+				}else if(command.equals("approveOvertime"))
 				{
-					System.out.println("please enter employe ID to award overtime to:\n");
+					System.out.println("please enter employe ID to approve overtime for:\n");
 					User u = db.pullUser(scanner.nextInt());
-					System.out.println("please enter number of hours to award");
-					//((Employee)u).;   need an overtime approved?
+					((Employee)u).approveOvertime();
 					db.putUser(u);
 				}else if(command.equals("setPayScale"))
 				{
@@ -370,12 +373,13 @@ public class HourLog {
 						+ "\nuseVacation - Use vacation time."
 						+ "\nviewSick - View sick time used."
 						+ "\nviewVacation - View vacation time used."
+						+ "\nviewMonthlyPay - View current montly paycheck info."
 						+ "\n\n----------Manager Commands------------"
 						+ "\n*addEmployee - Add a new employee."
 						+ "\n*removeEmployee - Remove an employee. Caution - do not remove yourself!"
 					    + "\n*viewHours - view hours for any employee given id"
-						//+ "\n*approveHours - approve the input hours for an employee"
-						//+ "\n*awardOvertime - approve Overtime hours"
+						+ "\n*approveHours - approve the input hours for an employee"
+						+ "\n*approveOvertime - approve Overtime hours"
 						+ "\n*setPayScale - Set the pay rate for an employee."
 						+ "\n*viewSick - View sick time used for an employee."
 						+ "\n*viewVacation - View vacation time used for an employee."

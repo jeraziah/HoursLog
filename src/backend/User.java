@@ -17,5 +17,7 @@ public interface User {
 	public boolean getOvertime();
 	
 	public int getTotalHours();
+	
+	public boolean viewMonthlyPay(int month);
 }
 

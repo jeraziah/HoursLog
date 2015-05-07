@@ -100,6 +100,34 @@ public class Employee implements User {
 		return true;
 	}
 	
+	@Override
+	public boolean viewMonthlyPay(int month) {
+		double pay = 0;
+		
+		for(int i = Conversions.getFirstDayOfMonth(month); i < Conversions.getLastDayOfMonth(month); i++) {
+			if(this.hours[i] > 8) {
+				pay += 8 * this.payScale;
+				if(this.overtimeApproved) {
+					pay += (this.hours[i] - 8) * (this.payScale * 1.5);
+				}
+			}
+			else if(this.hours[i] > 0) {
+				pay += this.hours[i] * this.payScale;
+			}
+		}
+		if(!this.hoursApproved) {
+			pay = 0;
+			System.out.println("Hours are currently awaiting approval.");
+		}
+		if(!this.overtimeApproved) {
+			System.out.println("Overtime hours are currently awaiting approval.");
+		}
+		System.out.println("Current monthly pay is: $" + pay);
+		
+		
+		return true;
+	}
+	
 	public boolean useSick(int month, int dayOfMonth) {
 		int converted = Conversions.convert(month,  dayOfMonth);
 		
