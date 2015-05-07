@@ -1,5 +1,7 @@
 package backend;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -414,5 +416,26 @@ public class HourLog {
 						+ "\nshutdown - Exit the application (This will erase all data)."
 						+ "\nlogoff - Log the current user out of the system."
 						+ "\n");
+	}
+	
+	public static void readInData() throws FileNotFoundException{
+		//format is id,isManager,sick,vacation,hoursApproved, overtimeApproved, hours day 1, hours day 2, etc
+		File file = new File("database.txt");
+		Scanner scanner = new Scanner(file);
+		scanner.useDelimiter(",\n");
+				
+		while(scanner.hasNext()){
+			int tempId = scanner.nextInt();
+			int isManager = scanner.nextInt();
+			User temp;
+			
+			if(isManager == 0){
+				temp = new Employee(scanner.nextInt());
+			}else{
+				temp = new Manager(scanner.nextInt());
+			}
+			db.putUser(temp);
+			
+		}
 	}
 }
