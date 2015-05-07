@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class HourLog {
@@ -8,6 +9,9 @@ public class HourLog {
 
 	public static void main(String args[]){	
 		db = new DatabaseSupport();
+		Calendar cal = Calendar.getInstance();
+		Date date = new Date();
+		cal.setTime(date);
 		
 		Scanner scanner = new Scanner(System.in);
 		
@@ -19,36 +23,45 @@ public class HourLog {
 		
 		while (true) {
 
-			System.out
-					.println("Please enter a command or type 'h' for help:\n");
+			System.out.println("Please enter a command or type 'h' for help:\n");
 
 			String command = scanner.next();
 
 			if (command.equals("h")) {	
 				printHelpMenu();
 			} else if(command.equals("setHours")) {
+				System.out.println("Enter the day of the month you wish to record hours for:");
+				int dayOfMonth = scanner.nextInt();
 				System.out.println("Please enter number of hours worked:\n");
 				User temp = db.pullUser(currentUser.getID());
-				temp.setHours(Calendar.MONTH, Calendar.DAY_OF_MONTH, scanner.nextInt());
+				temp.setHours(Calendar.getInstance().get(Calendar.MONTH) + 1, dayOfMonth, scanner.nextInt());
 				db.putUser(temp);
 			}
 			else if(command.equals("getDailyHours"))
 			{
 				User u = db.pullUser(currentUser.getID());
-				u.getDailyHours(Calendar.MONTH, Calendar.DAY_OF_MONTH);
+				u.getDailyHours(Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.DAY_OF_MONTH + 1);
 				db.putUser(u);
-			}else if(command.equals("getOvertime"))
+			}
+			else if(command.equals("getWeeklyHours")) {
+				//System.out.println("Enter the week of the current month you wish to view:");
+				//int weekOfMonth = scanner.nextInt();
+				User u = db.pullUser(currentUser.getID());
+				u.getWeeklyHours(Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().getFirstDayOfWeek() + 2);
+			}
+			else if(command.equals("getOvertime"))
 			{
 				db.pullUser(currentUser.getID()).getOvertime();
-			}else if(command.equals("useSick"))
+			}
+			else if(command.equals("useSick"))
 			{
 				System.out.println("Please enter the day of the month that you wish to use your sick day on:");
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
-					((Employee)u).useSick(Calendar.MONTH, scanner.nextInt());
+					((Employee)u).useSick(Calendar.MONTH + 1, scanner.nextInt());
 				}
 				else {
-					((Manager)u).useSick(Calendar.MONTH, scanner.nextInt());
+					((Manager)u).useSick(Calendar.MONTH + 1, scanner.nextInt());
 				}
 				db.putUser(u);
 			}else if(command.equals("useVacation"))
@@ -56,10 +69,10 @@ public class HourLog {
 				System.out.println("Please enter the day of the month that you wish to use your vacation day on:");
 				User u = db.pullUser(currentUser.getID());
 				if(u instanceof Employee) {
-					((Employee)u).useVacation(Calendar.MONTH, scanner.nextInt());
+					((Employee)u).useVacation(Calendar.MONTH + 1, scanner.nextInt());
 				}
 				else {
-					((Manager)u).useVacation(Calendar.MONTH, scanner.nextInt());
+					((Manager)u).useVacation(Calendar.MONTH + 1, scanner.nextInt());
 				}
 			}else if(command.equals("viewSick") && currentUser instanceof Employee)
 			{

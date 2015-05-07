@@ -49,7 +49,7 @@ public class Employee implements User {
 		int day = firstDayOfWeek;
 		for(int i = 0; i < 7;i++)
 		{	
-			getDailyHours(month, day);
+			getDailyHours(month, day + i);
 		}
 		
 		return true;
