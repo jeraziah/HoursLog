@@ -15,7 +15,7 @@ public class HourLog {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		System.out.println("Please create employeee id number for default manager. Default is 0:\n");
+		System.out.println("Please create employee id number for default manager. Default is 0:\n");
 		int id = scanner.nextInt();
 		User manager = new Manager(id);
 		db.putUser(manager);
