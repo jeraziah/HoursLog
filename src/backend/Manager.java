@@ -13,6 +13,7 @@ public class Manager implements User {
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
 	double payScale;
+	double taxRate;
 	
 	public Manager(int id)
 	{
@@ -110,8 +111,6 @@ public class Manager implements User {
 			}
 		}
 		
-		System.out.println("Total hours for user is: " + total);
-		
 		return total;
 	}
 	
@@ -138,7 +137,7 @@ public class Manager implements User {
 			System.out.println("Overtime hours are currently awaiting approval.");
 		}
 		System.out.println("Current monthly pay is: $" + pay);
-		
+		System.out.println("Current net monthly pay is: $" + (pay * taxRate));
 		
 		return true;
 	}
