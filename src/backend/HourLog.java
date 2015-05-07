@@ -172,9 +172,12 @@ public class HourLog {
 					
 				}else if(command.equals("viewTotalHours"))
 				{
-					System.out.println("please enter employee ID:\n");
-				
-					db.pullUser(scanner.nextInt()).getTotalHours();
+					int totalHours = 0;
+					
+					for(int i = 0; i < db.users.size(); i++) {
+						totalHours += db.users.get(i).getTotalHours();
+					}
+					System.out.println("Total hours over all employees is: " + totalHours);
 				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
@@ -201,20 +204,35 @@ public class HourLog {
 						System.out.println("Employee Overtime: " + ((Manager)u).overtime + " hours");
 					}
 					
-				}/*else if(command.equals("getTaxRate"))
-				{
-					//System.out.println("please enter employee ID:\n");
-					//((Employee)db.pullUser(scanner.nextInt())).getTaxRate();
-			
-				}else if(command.equals("viewEmployeeYTD"))
+				}else if(command.equals("getTaxRate"))
 				{
 					System.out.println("please enter employee ID:\n");
-					db.pullUser(scanner.nextInt());
-					
-				}*/
+					User u = db.pullUser(scanner.nextInt());
+					if(u instanceof Employee) {
+						System.out.println("Employee tax rate is: " + ((((Employee)u).taxRate) * 100) + "%");
+					}
+					if(u instanceof Manager) {
+						System.out.println("Employee tax rate is: " + ((((Manager)u).taxRate) * 100) + "%");
+					}
+					  }
+					 
 				
+				else if(command.equals("setTaxRate")) {
+					System.out.println("Please enter employee ID:");
+					User u = db.pullUser(scanner.nextInt());
+					System.out.println("Enter tax rate as a percentage (e.g. 13.4)");
+					if(u instanceof Employee) {
+						((Employee)u).taxRate = scanner.nextDouble();
+					}
+					if(u instanceof Manager) {
+						((Manager)u).taxRate = scanner.nextDouble();
+					}
+				}
 				
-				
+				else if(command.equals("viewEmployeeYTD")) {
+					System.out.println("Please enter employee ID:");
+					db.pullUser(scanner.nextInt()).getYTD();
+				}
 				
 				else if (command.equals("shutdown")) {
 					System.out.println("Please type 'y' to confirm. This will reset EVERYTHING!");
@@ -266,6 +284,25 @@ public class HourLog {
 
 		return false;
 	}
+	
+	public boolean setTaxRate(int id, int taxRate) {
+		User user = db.pullUser(id);
+
+		if (user == null) {
+			return false;
+		}
+
+		if (user instanceof Employee) {
+			((Employee) user).taxRate = (taxRate / 100);
+			return true;
+		}
+		if (user instanceof Manager) {
+			((Manager) user).taxRate = (taxRate / 100);
+			return true;
+		}
+
+		return false;
+	}
 
 	public boolean removeEmployee(int id) {
 		User user = db.pullUser(id);
@@ -278,26 +315,6 @@ public class HourLog {
 			db.putUser(user);
 			return true;
 		}
-	}
-
-	
-	public boolean viewHours(int id) {
-		User user = db.pullUser(id);
-		
-		if(user == null) {
-			System.err.println("User does not exist.");
-		}
-		
-		if (user instanceof Employee) {
-			((Employee)user).getTotalHours();
-			return true;
-		}
-		if (user instanceof Manager) {
-			((Manager)user).getTotalHours();
-			return true;
-		}
-		
-		return false;
 	}
 
 	public boolean approveHours(int id) {
@@ -385,10 +402,11 @@ public class HourLog {
 						+ "\n*setPayScale - Set the pay rate for an employee."
 						+ "\n*viewSick - View sick time used for an employee."
 						+ "\n*viewVacation - View vacation time used for an employee."
-						//+ "\n*viewTotalHours view hour totals for all employees"
+						+ "\n*viewTotalHours view hour totals for all employees"
 						+ "\n*viewOvertimePaidTotal - view all payments for overtime"
 						+ "\n*viewOvertimePaidEmployee"
-						//+ "getTaxRate - get the tax percentages for an employee"
+						+ "\n*getTaxRate - get the tax percentages for an employee"
+						+ "\n*setTaxRate - Set the tax percentages for an employee."
 						+ "viewEmployeeYTD - view the year to date earnings of an employee"
 						+ "\n-----------Exit Commands-----------------"
 						+ "\nshutdown - Exit the application (This will erase all data)."

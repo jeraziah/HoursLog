@@ -12,6 +12,7 @@ public class Employee implements User {
 	private boolean hoursApproved = false;//should this be last date approved?
 	private boolean overtimeApproved = false;
 	double payScale;
+	double taxRate;
 	
 	public Employee (int id) {
 		this.id = id;
@@ -122,8 +123,8 @@ public class Employee implements User {
 		if(!this.overtimeApproved) {
 			System.out.println("Overtime hours are currently awaiting approval.");
 		}
-		System.out.println("Current monthly pay is: $" + pay);
-		
+		System.out.println("Current gross monthly pay is: $" + pay);
+		System.out.println("Current net monthly pay is: $" + (pay * taxRate));
 		
 		return true;
 	}
@@ -197,9 +198,7 @@ public class Employee implements User {
 				total += this.hours[i];
 			}
 		}
-		
-		System.out.println("Total hours for user is: " + total);
-		
+	
 		return total;
 	}
 }
