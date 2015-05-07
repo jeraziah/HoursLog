@@ -6,7 +6,7 @@ import java.util.Date;
 public class Employee implements User {
 	public int[] hours = new int[365];
 	int id;
-	int overtime;
+	int overtime = 0;
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
 	private boolean hoursApproved = false;//should this be last date approved?
@@ -32,6 +32,11 @@ public class Employee implements User {
 		int converted = Conversions.convert(month, dayOfMonth);
 	
 		this.hours[converted] = hours;
+		
+
+		if(this.hours[converted] > 8) {
+			overtime += (this.hours[converted] - 8);
+		}
 		
 		return true;
 	}
@@ -76,7 +81,7 @@ public class Employee implements User {
 
 	@Override
 	public boolean getOvertime() {
-		Calendar calendar = Calendar.getInstance();
+	/*	Calendar calendar = Calendar.getInstance();
 		Date date = new Date();
 		calendar.setTime(date);
 		int month = calendar.get(Calendar.MONTH) + 1;
@@ -86,10 +91,10 @@ public class Employee implements User {
 		overtime = 0;
 		for(int i = 0; i < converted; i++) {
 			if(hours[i] > 8) {
-				overtime = overtime + (hours[i] - 8);
+				overtime += (hours[i] - 8);
 			}
 		}
-		
+		*/
 		System.out.println("Employee Overtime: " + overtime);
 		
 		return true;

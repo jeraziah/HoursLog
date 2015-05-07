@@ -6,7 +6,7 @@ import java.util.Date;
 public class Manager implements User {
 	public int[] hours = new int[365];
 	boolean manager = true;
-	int overtime;
+	int overtime = 0;
 	int id;
 	private int sickDaysRemaining = 10;
 	private int vacationDaysRemaining = 10;
@@ -32,6 +32,10 @@ public class Manager implements User {
 		int converted = Conversions.convert(month, dayOfMonth);
 	
 		this.hours[converted] = hours;
+		
+		if(this.hours[converted] > 8) {
+			overtime += (this.hours[converted] - 8);
+		}
 		
 		return true;
 	}

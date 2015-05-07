@@ -166,7 +166,7 @@ public class HourLog {
 					System.out.println("please enter employee ID:\n");
 				
 					db.pullUser(scanner.nextInt()).getTotalHours();
-				}/*else if(command.equals("viewOvertimePaidTotal"))
+				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
 				
@@ -179,13 +179,13 @@ public class HourLog {
 							overtime += ((Manager)db.users.get(i)).overtime;
 						}
 					}
-					System.out.println("Total Overtime: " + overtime);
+					System.out.println("Total Overtime: " + overtime + " hours");
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					System.out.println("please enter employee ID:\n");
 					db.pullUser(scanner.nextInt());
 					
-				}else if(command.equals("getTaxRate"))
+				}/*else if(command.equals("getTaxRate"))
 				{
 					//System.out.println("please enter employee ID:\n");
 					//((Employee)db.pullUser(scanner.nextInt())).getTaxRate();
