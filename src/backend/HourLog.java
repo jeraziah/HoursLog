@@ -110,12 +110,12 @@ public class HourLog {
 				if(command.equals("")){
 				
 					
-				}/*else if (command.equals("getYTD")) {
+				}else if (command.equals("viewEmployeeYTD")) {
 					System.out.println("please enter employee id to get YTD of:\n");
 					int tempId = scanner.nextInt();
-					User tempUser = new Employee(tempId);
-					tempUser.getYTD();
-				} 	*/
+					User u = db.pullUser(tempId);
+					u.getYTD();
+				} 	
 				else if(command.equals("addEmployee"))
 				{
 					System.out.println("please enter employee id number\n");
@@ -183,7 +183,14 @@ public class HourLog {
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					System.out.println("please enter employee ID:\n");
-					db.pullUser(scanner.nextInt());
+					User u = db.pullUser(scanner.nextInt());
+					
+					if(u instanceof Employee) {
+						System.out.println("Employee Overtime: " + ((Employee)u).overtime + " hours"); ;
+					}
+					else if(u instanceof Manager) {
+						System.out.println("Employee Overtime: " + ((Manager)u).overtime + " hours");
+					}
 					
 				}/*else if(command.equals("getTaxRate"))
 				{
@@ -406,8 +413,8 @@ public class HourLog {
 						+ "\n*viewSick - View sick time used for an employee."
 						+ "\n*viewVacation - View vacation time used for an employee."
 						//+ "\n*viewTotalHours view hour totals for all employees"
-						//+ "\n*viewOvertimePaidTotal - view all payments for overtime"
-						//+ "\n*viewOvertimePaidEmployee"
+						+ "\n*viewOvertimePaidTotal - view all payments for overtime"
+						+ "\n*viewOvertimePaidEmployee"
 						//+ "getTaxRate - get the tax percentages for an employee"
 						//+ "viewEmployeeYTD - view the year to date earnings of an employee"
 						+ "\n-----------Exit Commands-----------------"
