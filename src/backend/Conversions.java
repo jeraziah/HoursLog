@@ -1,6 +1,19 @@
 package backend;
 
+import java.util.Calendar;
+
 public class Conversions {
+	public static int convertDayToMonth(int dayOfYear){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+		return calendar.MONTH;		
+	}
+	public static int convertDayToDayOfMonth(int dayOfYear){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR, dayOfYear);
+		return calendar.DAY_OF_MONTH;			
+	}
+	
 	public static int convert(int month, int dayOfMonth) {
 		if(inMonth(month, dayOfMonth))
 		{

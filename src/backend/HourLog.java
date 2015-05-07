@@ -397,23 +397,48 @@ public class HourLog {
 	}
 	
 	public static void readInData() throws FileNotFoundException{
-		//format is id,isManager,sick,vacation,hoursApproved, overtimeApproved, hours day 1, hours day 2, etc
+		//format is id, isManager, payscale, hoursApproved, overtimeApproved, hours day 1, hours day 2, etc
 		File file = new File("database.txt");
 		Scanner scanner = new Scanner(file);
 		scanner.useDelimiter(",\n");
 				
-		while(scanner.hasNext()){
+		while(scanner.hasNextLine()){
+			User temp;
 			int tempId = scanner.nextInt();
 			int isManager = scanner.nextInt();
-			User temp;
+			double payscale = scanner.nextDouble();
+			int hoursApproved = scanner.nextInt();
+			int overtimeApproved = scanner.nextInt();
+			
 			
 			if(isManager == 0){
-				temp = new Employee(scanner.nextInt());
+				temp = new Employee(tempId);
 			}else{
-				temp = new Manager(scanner.nextInt());
+				temp = new Manager(tempId);
+			}
+			((Employee)temp).payScale = payscale;
+			if(hoursApproved == 1){
+				((Employee)temp).approveHours();
+			}
+			if(overtimeApproved == 1){
+				((Employee)temp).approveOvertime();
+			}
+			
+			for(int i = 0; i < 365; i++)
+			{
+				int tempHour = scanner.nextInt();
+				int month = Conversions.convertDayToMonth(i+1);
+				int dayOfMonth = Conversions.convertDayToDayOfMonth(i+1);
+				
+				if(tempHour == -1){
+					((Employee)temp).useSick(month, dayOfMonth);
+				}else if(tempHour == -2){
+					((Employee)temp).useVacation(month, dayOfMonth);
+				}else {
+					((Employee)temp).setHours(month, dayOfMonth, tempHour);
+				}
 			}
 			db.putUser(temp);
-			
-		}
-	}
-}
+		}//while loop
+	}//method
+}//class
