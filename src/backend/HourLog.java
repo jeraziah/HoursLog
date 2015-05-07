@@ -96,7 +96,11 @@ public class HourLog {
 				else {
 					((Manager)u).viewVacation();
 				}
-			}else if(command.equals("logoff")) {
+			}
+			else if(command.equals("viewMonthlyPay")) {
+				db.pullUser(currentUser.getID()).viewMonthlyPay(Calendar.getInstance().get(Calendar.MONTH) + 1);
+			}
+			else if(command.equals("logoff")) {
 				currentUser = null;
 				while(currentUser == null) {
 					System.out.println("Please enter a user ID to login:");
@@ -112,12 +116,12 @@ public class HourLog {
 				if(command.equals("")){
 				
 					
-				}/*else if (command.equals("getYTD")) {
+				}else if (command.equals("viewEmployeeYTD")) {
 					System.out.println("please enter employee id to get YTD of:\n");
 					int tempId = scanner.nextInt();
-					User tempUser = new Employee(tempId);
-					tempUser.getYTD();
-				} 	*/
+					User u = db.pullUser(tempId);
+					u.getYTD();
+				} 	
 				else if(command.equals("addEmployee"))
 				{
 					System.out.println("please enter employee id number\n");
@@ -128,10 +132,14 @@ public class HourLog {
 					System.out.println("please enter employee id number\n");
 					int newId = scanner.nextInt();
 					db.removeUser(newId);
-				}else if(command.equals("viewHours"))
-				{
+				}else if(command.equals("viewHours")) {
 					System.out.println("Please enter employee ID number:\n");
-				}else if(command.equals("approveHours"))
+					User u = db.pullUser(scanner.nextInt());
+					System.out.println("Enter the day of the month to view hours for:\n");
+					u.getDailyHours(Calendar.getInstance().get(Calendar.MONTH) + 1, scanner.nextInt());
+					System.out.print("\n");
+					}
+				else if(command.equals("approveHours"))
 				{
 					//employee.approve(date)?
 					System.out.println("please enter employee ID to approve:\n");
@@ -139,12 +147,11 @@ public class HourLog {
 					((Employee)u).approveHours();
 					db.putUser(u);
 					
-				}else if(command.equals("awardOvertime"))
+				}else if(command.equals("approveOvertime"))
 				{
-					System.out.println("please enter employe ID to award overtime to:\n");
+					System.out.println("please enter employe ID to approve overtime for:\n");
 					User u = db.pullUser(scanner.nextInt());
-					System.out.println("please enter number of hours to award");
-					//((Employee)u).;   need an overtime approved?
+					((Employee)u).approveOvertime();
 					db.putUser(u);
 				}else if(command.equals("setPayScale"))
 				{
@@ -168,7 +175,7 @@ public class HourLog {
 					System.out.println("please enter employee ID:\n");
 				
 					db.pullUser(scanner.nextInt()).getTotalHours();
-				}/*else if(command.equals("viewOvertimePaidTotal"))
+				}else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
 				
@@ -181,13 +188,20 @@ public class HourLog {
 							overtime += ((Manager)db.users.get(i)).overtime;
 						}
 					}
-					System.out.println("Total Overtime: " + overtime);
+					System.out.println("Total Overtime: " + overtime + " hours");
 				}else if(command.equals("viewOvertimePaidEmployee"))
 				{
 					System.out.println("please enter employee ID:\n");
-					db.pullUser(scanner.nextInt());
+					User u = db.pullUser(scanner.nextInt());
 					
-				}else if(command.equals("getTaxRate"))
+					if(u instanceof Employee) {
+						System.out.println("Employee Overtime: " + ((Employee)u).overtime + " hours"); ;
+					}
+					else if(u instanceof Manager) {
+						System.out.println("Employee Overtime: " + ((Manager)u).overtime + " hours");
+					}
+					
+				}/*else if(command.equals("getTaxRate"))
 				{
 					//System.out.println("please enter employee ID:\n");
 					//((Employee)db.pullUser(scanner.nextInt())).getTaxRate();
@@ -266,43 +280,6 @@ public class HourLog {
 		}
 	}
 
-	public boolean viewDailyHours(int id, int month, int dayOfMonth) {
-		User user = db.pullUser(id);
-
-		if (user == null) {
-			System.err.println("User does not exist.");
-		}
-
-		if (user instanceof Employee) {
-			((Employee) user).getDailyHours(month, dayOfMonth);
-			return true;
-		}
-		if (user instanceof Manager) {
-			((Manager) user).getDailyHours(month, dayOfMonth);
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean viewWeeklyHours(int id, int month, int firstDayOfWeek) {
-		User user = db.pullUser(id);
-
-		if (user == null) {
-			System.err.println("User does not exist.");
-		}
-
-		if (user instanceof Employee) {
-			((Employee) user).getWeeklyHours(month, firstDayOfWeek);
-			return true;
-		}
-		if (user instanceof Manager) {
-			((Manager) user).getWeeklyHours(month, firstDayOfWeek);
-			return true;
-		}
-
-		return false;
-	}
 	
 	public boolean viewHours(int id) {
 		User user = db.pullUser(id);
@@ -398,20 +375,21 @@ public class HourLog {
 						+ "\nuseVacation - Use vacation time."
 						+ "\nviewSick - View sick time used."
 						+ "\nviewVacation - View vacation time used."
+						+ "\nviewMonthlyPay - View current montly paycheck info."
 						+ "\n\n----------Manager Commands------------"
 						+ "\n*addEmployee - Add a new employee."
 						+ "\n*removeEmployee - Remove an employee. Caution - do not remove yourself!"
-					    //+ "\n*viewHours - view hours for any employee given id"
-						//+ "\n*approveHours - approve the input hours for an employee"
-						//+ "\n*awardOvertime - approve Overtime hours"
+					    + "\n*viewHours - view hours for any employee given id"
+						+ "\n*approveHours - approve the input hours for an employee"
+						+ "\n*approveOvertime - approve Overtime hours"
 						+ "\n*setPayScale - Set the pay rate for an employee."
 						+ "\n*viewSick - View sick time used for an employee."
 						+ "\n*viewVacation - View vacation time used for an employee."
 						//+ "\n*viewTotalHours view hour totals for all employees"
-						//+ "\n*viewOvertimePaidTotal - view all payments for overtime"
-						//+ "\n*viewOvertimePaidEmployee"
+						+ "\n*viewOvertimePaidTotal - view all payments for overtime"
+						+ "\n*viewOvertimePaidEmployee"
 						//+ "getTaxRate - get the tax percentages for an employee"
-						//+ "viewEmployeeYTD - view the year to date earnings of an employee"
+						+ "viewEmployeeYTD - view the year to date earnings of an employee"
 						+ "\n-----------Exit Commands-----------------"
 						+ "\nshutdown - Exit the application (This will erase all data)."
 						+ "\nlogoff - Log the current user out of the system."

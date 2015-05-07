@@ -27,6 +27,38 @@ public class Conversions {
 		}
 	}
 	
+	public static int getFirstDayOfMonth(int month) {
+		if(month == 1) { return 0; }
+		if(month == 2) { return 31; }
+		if(month == 3) { return 59; }
+		if(month == 4) { return 90; }
+		if(month == 5) { return 120; }
+		if(month == 6) { return 151; }
+		if(month == 7) { return 181; }
+		if(month == 8) { return 212; }
+		if(month == 9) { return 243; }
+		if(month == 10) { return 273; }
+		if(month == 11) { return 304; }
+		if(month == 12) { return 334; }
+		return 0;
+	}
+	
+	public static int getLastDayOfMonth(int month) {
+		if(month == 1) { return 30; }
+		if(month == 2) { return 58; }
+		if(month == 3) { return 89; }
+		if(month == 4) { return 119; }
+		if(month == 5) { return 150; }
+		if(month == 6) { return 180; }
+		if(month == 7) { return 211; }
+		if(month == 8) { return 242; }
+		if(month == 9) { return 272; }
+		if(month == 10) { return 303; }
+		if(month == 11) { return 333; }
+		if(month == 12) { return 364; }
+		return 0;
+	}
+	
 	public static boolean inMonth(int month, int dayOfMonth) {
 		
 		// Verifies that the day integer provided is contained in the month.

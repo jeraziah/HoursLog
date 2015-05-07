@@ -6,11 +6,19 @@ public class DatabaseSupport {
 	ArrayList<User> users = new ArrayList<>();
 	
 	public boolean putUser(User user) {
-		
-		// Places a user into the database, returns true if added, false otherwise.
-		if(user != null) {
+		if(users.size() == 0) {
 			users.add(user);
 			return true;
+		}
+		// Places a user into the database, returns true if added, false otherwise.
+		if(user != null) {
+			for(int i = 0; i < users.size(); i++) {
+				if(users.get(i).equals(user)) {
+					users.set(i, user);
+					return true;
+				}
+			}
+			users.add(user);
 		}
 		return false;
 	}
