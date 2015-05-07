@@ -205,9 +205,10 @@ public class HourLog {
 						System.out.println("System exiting..........\n\n\n");
 						return;
 					}
-				}else{ //user isnt manager
-					System.out.println("You do not have privelages for this command");
 				}
+			}
+			else{ //user isnt manager
+				System.out.println("You do not have credentials for this command");
 			}//if statements
 		}//while loop
 	}
