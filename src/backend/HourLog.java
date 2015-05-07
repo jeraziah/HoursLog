@@ -44,10 +44,12 @@ public class HourLog {
 				db.putUser(u);
 			}
 			else if(command.equals("getWeeklyHours")) {
-				//System.out.println("Enter the week of the current month you wish to view:");
-				//int weekOfMonth = scanner.nextInt();
 				User u = db.pullUser(currentUser.getID());
 				u.getWeeklyHours(Calendar.getInstance().get(Calendar.MONTH) + 1, Calendar.getInstance().getFirstDayOfWeek() + 2);
+			}
+			else if(command.equals("getYTD")) {
+				User u = db.pullUser(currentUser.getID());
+				u.getYTD();
 			}
 			else if(command.equals("getOvertime"))
 			{
@@ -159,12 +161,12 @@ public class HourLog {
 					System.out.println("please enter employee ID:\n");
 					((Employee)db.pullUser(scanner.nextInt())).viewVacation();
 					
-				}/*else if(command.equals("viewTotalHours"))
+				}else if(command.equals("viewTotalHours"))
 				{
 					System.out.println("please enter employee ID:\n");
 				
 					db.pullUser(scanner.nextInt()).getTotalHours();
-				}else if(command.equals("viewOvertimePaidTotal"))
+				}/*else if(command.equals("viewOvertimePaidTotal"))
 				{
 					int overtime = 0;
 				
@@ -385,30 +387,32 @@ public class HourLog {
 						+ "\nHelp Menu:\n"
 						+ "\nh - help\n\n* indicates manager functions"
 						+ "\n-----------User Commands-----------------"
-						//+ "\ngetYTD - get year to date earnings"
-						+ "\nsetHours sets hours worked for the current day"
-						+ "\ngetDailyHours - get the hours worked the past 7 days"
-						+ "\ngetWeeklyHours - get the hours worked displayed by week"
-						+ "\ngetOvertime - display overtime logged this year"
-						+ "\nuseSick - use sick time"
-						+ "\nuseVacation - use vacation time"
-						+ "\nviewSick - view sick time used"
-						+ "\nviewVacation - view vacation time used"
-						+ "\n\n----------Manager Commands------------ "
-						+ "\n*addEmployee - add a new employee"
-						+ "\n*removeEmployee - remove an employee. Caution - do not remove yourself!"
-					//	+ "\n*viewHours - view hours for any employee given id"
+						+ "\ngetYTD - Get year to date earnings."
+						+ "\nsetHours - Sets hours worked for the current day."
+						+ "\ngetDailyHours - Get the hours worked the past 7 days."
+						+ "\ngetWeeklyHours - Get the hours worked displayed by week."
+						+ "\ngetOvertime - Display overtime logged this year."
+						+ "\nuseSick - Use sick time."
+						+ "\nuseVacation - Use vacation time."
+						+ "\nviewSick - View sick time used."
+						+ "\nviewVacation - View vacation time used."
+						+ "\n\n----------Manager Commands------------"
+						+ "\n*addEmployee - Add a new employee."
+						+ "\n*removeEmployee - Remove an employee. Caution - do not remove yourself!"
+					    //+ "\n*viewHours - view hours for any employee given id"
 						//+ "\n*approveHours - approve the input hours for an employee"
 						//+ "\n*awardOvertime - approve Overtime hours"
-						+ "\n*setPayScale - set the pay rate for an employee"
-						+ "\n*viewSick - view sick time used for an employee"
-						+ "\n*viewVacation - view vacation time used for an employee"
+						+ "\n*setPayScale - Set the pay rate for an employee."
+						+ "\n*viewSick - View sick time used for an employee."
+						+ "\n*viewVacation - View vacation time used for an employee."
 						//+ "\n*viewTotalHours view hour totals for all employees"
 						//+ "\n*viewOvertimePaidTotal - view all payments for overtime"
 						//+ "\n*viewOvertimePaidEmployee"
 						//+ "getTaxRate - get the tax percentages for an employee"
 						//+ "viewEmployeeYTD - view the year to date earnings of an employee"
-						+ "\n*shutdown - exit the application - this will erase all data"
+						+ "\n-----------Exit Commands-----------------"
+						+ "\nshutdown - Exit the application (This will erase all data)."
+						+ "\nlogoff - Log the current user out of the system."
 						+ "\n");
 	}
 }
